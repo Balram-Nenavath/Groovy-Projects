@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangeloghttp://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <changeSet id="add-columns-to-person-table" author="JohnDoe"><addColumn tableName="person">
+        <column name="address" type="varchar(255)"><constraints nullable="true"/></column>
+        <column name="phone" type="varchar(20)"><constraints nullable="true"/></column></addColumn>
+    </changeSet></databaseChangeLog>
