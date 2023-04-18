@@ -1,0 +1,90 @@
+plugins {
+    id 'java'
+    id 'jacoco'
+    id 'war'
+}
+
+
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+
+   // implementation 'com.mappedin.sdk:mappedin:5.0.3'
+    //implementation 'com.mappedin.sdk:android-mvf-downloader:1.2.0'
+  //  implementation 'moe.pine:nonnull:0.1.1'
+  //  implementation 'com.diglol.id:id-jvm:0.2.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.2'
+    implementation 'org.jacoco:org.jacoco.core:0.8.8'
+    implementation 'org.apache.logging.log4j:log4j:2.20.0'
+
+}
+
+
+
+test {
+    finalizedBy jacocoTestReport // report is always generated after tests run
+}
+jacocoTestReport {
+    dependsOn test // tests are required to run before generating the report
+}
+
+
+tasks.register('Random') {
+    doLast {
+        println 'Hello Balram!'
+        String name = 'Balram_Nenavath'
+        println "Original: $name"
+        println "Upper case: ${name.toUpperCase()}"
+        4.times { print "$it " }
+    }
+}
+
+tasks.register('Random_Next') {
+    dependsOn tasks.Random
+    doLast {
+        println "Above Task Executed Successfully"
+    }
+}
+tasks.register('FileRead') {
+    def resourceDirectory = file('C:\\Users\\bnenavath\\Desktop\\Postman')
+    doLast {
+        def files = resourceDirectory.listFiles().sort()
+        files.each { File file ->
+            if (file.isFile()) {
+                ant.loadfile(srcFile: file, property: file.name)
+                println " *** $file.name ***"
+                println "${ant.properties[file.name]}"
+            }
+        }
+    }
+}
+
+tasks.register('cleanIt') {
+    doLast {
+        println 'Default Cleaning!'
+    }
+}
+
+File[] fileList(String dir) {
+    file(dir).listFiles({file -> file.isFile() } as FileFilter).sort()
+}
+tasks.register('loadfile') {
+    doLast {
+        fileList('C:\\Users\\bnenavath\\Desktop\\Postman').each { File file ->
+            ant.loadfile(srcFile: file, property: file.name)
+            println "I found the $file.name"
+        }
+    }
+}
+
+
+test {
+    useJUnitPlatform()
+}

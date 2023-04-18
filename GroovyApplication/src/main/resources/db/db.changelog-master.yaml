@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: createTables
+      author: Balram Nenavath
+      changes:
+      - sqlFile:
+          dbms: postgresql
+          encoding: utf8
+          endDelimiter: \n/\s*\n|\n/\s*$
+          path: changelog/scripts/01-create-employeedata-and-project-schema.sql
+          relativeToChangelogFile: true
+          splitStatements: true
+          stripComments: true
+  - changeSet:
+      id: insertTableProject
+      author: Balram Nenavath
+      changes:
+      - sqlFile:
+          dbms: postgresql
+          encoding: utf8
+          path: changelog/scripts/02-insert-data-project.sql
+          relativeToChangelogFile: true
+          splitStatements: true
+          stripComments: true
+  - changeSet:
+      id: insertTableEmployeeData
+      author: Balram Nenavath
+      changes:
+      - sqlFile:
+          dbms: postgresql
+          encoding: utf8
+          path: changelog/scripts/02-insert-data-employeedata.sql
+          relativeToChangelogFile: true
+          splitStatements: true
+          stripComments: true
